@@ -65,4 +65,65 @@ public class VarastoTest {
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
 
+    @Test
+    public void vaaraAlustaminenAsettaaTilavuudeksiNollan() {
+        Varasto varasto2 = new Varasto(-5);
+        assertEquals(0.0, varasto2.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void huonotParametritAsettavatNollatSaldoonJaTilavuuteen() {
+        Varasto tempVarasto = new Varasto(-5, -5);
+        assertEquals(0.0, tempVarasto.getTilavuus(), vertailuTarkkuus);
+        assertEquals(0.0, tempVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void toimiiKunnollisillaParametreilla() {
+        Varasto tempVarasto = new Varasto(5, 5);
+        assertEquals(5.0, tempVarasto.getTilavuus(), vertailuTarkkuus);
+        assertEquals(5.0, tempVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void yliMaarainenSaldoMeneeHukkaan() {
+        Varasto tempVarasto = new Varasto(5, 7);
+        assertEquals(5.0, tempVarasto.getTilavuus(), vertailuTarkkuus);
+        assertEquals(5.0, tempVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivinenLisaaminenPalauttaaNull() {
+        Varasto tempVarasto = new Varasto(10, 7);
+        tempVarasto.lisaaVarastoon(-5.0);
+        assertEquals(7.0, tempVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void saldoMeneeTayteenKunLisaaLiikaa() {
+        Varasto tempVarasto = new Varasto(10, 7);
+        tempVarasto.lisaaVarastoon(12.00);
+        assertEquals(10.00, tempVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void saldolleEiTapahduMitaanNegatiivisellaParametrilla() {
+        Varasto tempVarasto = new Varasto(10, 7);
+        tempVarasto.otaVarastosta(-5.0);
+        assertEquals(7.0, tempVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void josOttaaYliSaldonSaldoTyhjenee() {
+        Varasto tempVarasto = new Varasto(10, 7);
+        tempVarasto.otaVarastosta(2000.0);
+        assertEquals(0.0, tempVarasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void printtaaTilanOikein() {
+        assertEquals("saldo = 0.0, vielä tilaa 10.0", varasto.toString());
+    }
+
+
 }
