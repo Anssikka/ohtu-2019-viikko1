@@ -117,7 +117,7 @@ public class VarastoTest {
     public void josOttaaYliSaldonSaldoTyhjenee() {
         Varasto tempVarasto = new Varasto(10, 7);
         tempVarasto.otaVarastosta(2000.0);
-        assertEquals(0.5, tempVarasto.getSaldo(), vertailuTarkkuus);
+        assertEquals(0.0, tempVarasto.getSaldo(), vertailuTarkkuus);
     }
 
     @Test
