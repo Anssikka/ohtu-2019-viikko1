@@ -53,7 +53,8 @@ public class Varasto {
     }
 
     public double otaVarastosta(double maara) {
-        if (maara < 0) {
+        if (maara < 0)
+        {
             return 0.0;   // tällainen pikapoistuminenkin!
         }
         if (maara > saldo) {          // annetaan mitä voidaan
